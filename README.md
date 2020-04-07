@@ -8,3 +8,10 @@ with User: postgresql and Password: admin
 4. Download Java 1.8 (you need an Oracle account, good luck)
 5. Download Gradle 4.6 (if intellij brings a newer version, downgrade to this one)
 6. Run the project
+
+
+To modify the project:
+1. Make a new branch for any small change
+2. Make a pull request and wait for approve
+
+!!! Don't push on master.
