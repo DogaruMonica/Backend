@@ -41,7 +41,7 @@ public class PupilImpl implements PupilRepository {
     }
 
     private Integer insert(Pupil pupil) {
-        return template.update("INSERT INTO Pupils (firstname, lastname) VALUES (?)", pupil.getFirstname(), pupil.getLastname());
+        return template.update("INSERT INTO Pupils (firstname, lastname) VALUES (?,?)", pupil.getFirstname(), pupil.getLastname());
     }
 
     public void update(Pupil pupil) {

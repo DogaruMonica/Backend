@@ -41,7 +41,7 @@ public class UserImpl implements UserRepository {
     }
 
     private Integer insert(User user) {
-        return template.update("INSERT INTO Users (email, password, role) VALUES (?)", user.getEmail(), user.getPassword(), user.getRole());
+        return template.update("INSERT INTO Users (email, password, role) VALUES (?,?,?)", user.getEmail(), user.getPassword(), user.getRole());
     }
 
     public void update(User user) {
