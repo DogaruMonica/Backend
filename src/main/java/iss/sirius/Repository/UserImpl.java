@@ -31,6 +31,12 @@ public class UserImpl implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByEmailAndPassword(String email, String password) {
+        List<User> users = template.query("SELECT * FROM Users WHERE email = ? AND password = ?", new UserMapper(), email, password);
+        return users.isEmpty() ? Optional.empty() : Optional.of(users.get(0));
+    }
+
+    @Override
     public List<User> findAll() {
         return template.query("SELECT * FROM Users", new UserMapper());
     }
