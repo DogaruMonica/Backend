@@ -11,6 +11,8 @@ public interface UserRepository {
 
     public Optional<User> findById(int id);
 
+    public Optional<User> findByEmailAndPassword(String email, String password);
+
     public List<User> findAll();
 
     public void remove(User User);

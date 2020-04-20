@@ -4,11 +4,7 @@ import iss.sirius.Model.User;
 import iss.sirius.Repository.Interfaces.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -46,5 +42,15 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public Object getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
+    public Object login(@RequestBody User userAux) throws Exception {
+        Optional<User> user = userRepository.findByEmailAndPassword(userAux.getEmail(), userAux.getPassword());
+        if (user.isPresent()) {
+            return user;
+        } else {
+            throw new Exception("Invalid email or password!");
+        }
     }
 }
