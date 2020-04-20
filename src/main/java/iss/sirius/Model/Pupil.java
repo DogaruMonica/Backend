@@ -23,8 +23,8 @@ public class Pupil {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "catalogid", referencedColumnName = "id")
-    private Catalog catalog;
+    @JoinColumn(name = "classroomid", referencedColumnName = "id")
+    private Classroom classroom;
 
     @Column(name = "firstname")
     private String firstname;

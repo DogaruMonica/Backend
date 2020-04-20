@@ -19,9 +19,6 @@ public class Subject {
     @ManyToMany(mappedBy = "subjects")
     private Set<Teacher> teachers;
 
-    @ManyToMany(mappedBy = "subjects")
-    private Set<Catalog> catalogs;
-
     @Column(name = "name")
     private String name;
 
@@ -64,13 +61,5 @@ public class Subject {
                 ", teachers=" + teachers +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    public Set<Catalog> getCatalogs() {
-        return catalogs;
-    }
-
-    public void setCatalogs(Set<Catalog> catalogs) {
-        this.catalogs = catalogs;
     }
 }
