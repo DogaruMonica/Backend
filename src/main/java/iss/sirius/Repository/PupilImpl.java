@@ -41,10 +41,10 @@ public class PupilImpl implements PupilRepository {
     }
 
     private Integer insert(Pupil pupil) {
-        return template.update("INSERT INTO Pupils (firstname, lastname) VALUES (?,?)", pupil.getFirstname(), pupil.getLastname());
+        return template.update("INSERT INTO Pupils (firstname, lastname, userid) VALUES (?,?,?)", pupil.getFirstname(), pupil.getLastname(), pupil.getUser().getId());
     }
 
     public void update(Pupil pupil) {
-        template.update("UPDATE Pupils SET firstname = ?, lastname = ? WHERE id = ?", pupil.getFirstname(), pupil.getLastname());
+        template.update("UPDATE Pupils SET firstname = ?, lastname = ? WHERE id = ?", pupil.getFirstname(), pupil.getLastname(), pupil.getUser().getId());
     }
 }

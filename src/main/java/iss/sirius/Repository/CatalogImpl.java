@@ -41,6 +41,6 @@ public class CatalogImpl implements CatalogRepository {
     }
 
     private Integer insert(Catalog catalog) {
-        return template.update("INSERT INTO Catalogs VALUES (default)");
+        return template.update("INSERT INTO Catalogs (classroomid) VALUES (?)", catalog.getClassroom().getId());
     }
 }

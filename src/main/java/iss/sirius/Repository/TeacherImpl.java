@@ -41,7 +41,7 @@ public class TeacherImpl implements TeacherRepository {
     }
 
     private Integer insert(Teacher teacher) {
-        return template.update("INSERT INTO Teachers (firstname, lastname) VALUES (?,?)", teacher.getFirstname(), teacher.getLastname());
+        return template.update("INSERT INTO Teachers (firstname, lastname, userid) VALUES (?,?,?)", teacher.getFirstname(), teacher.getLastname(), teacher.getUser().getId());
     }
 
     public void update(Teacher teacher) {

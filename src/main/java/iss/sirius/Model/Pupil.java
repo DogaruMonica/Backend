@@ -32,6 +32,8 @@ public class Pupil {
     @Column(name = "lastname")
     private String lastname;
 
+    public Pupil(){}
+
     public Pupil(int id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
@@ -74,5 +76,21 @@ public class Pupil {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname +
                 '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 }

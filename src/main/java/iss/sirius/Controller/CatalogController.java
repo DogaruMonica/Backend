@@ -1,7 +1,9 @@
 package iss.sirius.Controller;
 
 import iss.sirius.Model.Catalog;
+import iss.sirius.Model.Classroom;
 import iss.sirius.Repository.Interfaces.CatalogRepository;
+import iss.sirius.Repository.Interfaces.ClassroomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,15 +20,24 @@ import java.util.Optional;
 public class CatalogController {
     @Autowired
     CatalogRepository catalogRepository;
+    @Autowired
+    ClassroomRepository classroomRepository;
+
+    @RequestMapping(value = "/catalog/{classroomid}", method = RequestMethod.POST, consumes = "application/json")
+    public void addCatalog(@RequestBody Catalog catalog, @PathVariable int classroomid) throws Exception {
+        Optional<Classroom> classroom = classroomRepository.findById(classroomid);
+        if (classroom.isPresent()) {
+            catalog.setClassroom(classroom.get());
+            catalogRepository.save(catalog);
+        }
+        else {
+            throw new Exception("invalid classroom");
+        }
+    }
 
     @RequestMapping(value = "/catalog/{id}", method = RequestMethod.GET)
     public Object getCatalog(@PathVariable int id) {
         return catalogRepository.findById(id);
-    }
-
-    @RequestMapping(value = "/catalog", method = RequestMethod.POST, consumes = "application/json")
-    public void addCatalog(@RequestBody Catalog catalog) throws Exception {
-        catalogRepository.save(catalog);
     }
 
     @RequestMapping(value = "/catalog/{id}", method = RequestMethod.DELETE)

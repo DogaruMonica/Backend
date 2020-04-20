@@ -40,4 +40,12 @@ public class Catalog {
                 "id=" + id +
                 '}';
     }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
+    }
 }
