@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,11 +22,17 @@ public class Pupil {
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "classroomid", referencedColumnName = "id")
+    private Classroom classroom;
+
     @Column(name = "firstname")
     private String firstname;
 
     @Column(name = "lastname")
     private String lastname;
+
+    public Pupil(){}
 
     public Pupil(int id, String firstname, String lastname) {
         this.id = id;
@@ -69,5 +76,21 @@ public class Pupil {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname +
                 '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 }
