@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+/*
 
 @Component
 @RequiredArgsConstructor
@@ -48,3 +49,4 @@ public class ClassroomImpl implements ClassroomRepository {
         template.update("UPDATE Classrooms SET name = ? WHERE id = ?", classroom.getName());
     }
 }
+*/

@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "pupils")
-public class Pupil {
+public class Pupil{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 

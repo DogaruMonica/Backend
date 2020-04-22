@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,7 +32,7 @@ public class ClassroomController {
 
         @RequestMapping(value = "/classroom", method = RequestMethod.PUT, consumes = "application/json")
         public void updateClassroom(@RequestBody Classroom classroom) throws SQLException {
-            classroomRepository.update(classroom);
+            classroomRepository.save(classroom);
         }
 
         @RequestMapping(value = "/classroom/{id}", method = RequestMethod.DELETE)
@@ -39,12 +40,13 @@ public class ClassroomController {
             if (classroomRepository.findById(id).equals(Optional.empty())) {
                 throw new Exception("Why remove something that doesn't exist ????");
             } else {
-                classroomRepository.remove(classroomRepository.findById(id).get());
+                classroomRepository.delete(classroomRepository.findById(id).get());
             }
         }
 
         @RequestMapping(value = "/classroom", method = RequestMethod.GET)
         public Object getAllClassrooms() {
-            return classroomRepository.findAll();
+            List<Classroom> data = classroomRepository.findAll();
+            return data;
         }
 }

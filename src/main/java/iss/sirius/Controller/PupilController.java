@@ -44,7 +44,7 @@ public class PupilController {
 
     @RequestMapping(value = "/pupil", method = RequestMethod.PUT, consumes = "application/json")
     public void updatePupil(@RequestBody Pupil pupil) throws SQLException {
-        pupilRepository.update(pupil);
+        pupilRepository.save(pupil);
     }
 
     @RequestMapping(value = "/pupil/{id}", method = RequestMethod.DELETE)
@@ -52,12 +52,12 @@ public class PupilController {
         if (pupilRepository.findById(id).equals(Optional.empty())) {
             throw new Exception("Why remove something that doesn't exist ????");
         } else {
-            pupilRepository.remove(pupilRepository.findById(id).get());
+            pupilRepository.delete(pupilRepository.findById(id).get());
         }
     }
 
     @RequestMapping(value = "/pupil", method = RequestMethod.GET)
-    public Object getAllPupils() {
+    public List<Pupil> getAllPupils() {
         List<Pupil> lista =pupilRepository.findAll();
         return pupilRepository.findAll();
     }

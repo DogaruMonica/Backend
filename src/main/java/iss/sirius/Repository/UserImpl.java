@@ -1,5 +1,5 @@
 package iss.sirius.Repository;
-
+/*
 import iss.sirius.Model.User;
 import iss.sirius.Repository.Interfaces.UserRepository;
 import iss.sirius.Repository.Mappers.UserMapper;
@@ -53,4 +53,4 @@ public class UserImpl implements UserRepository {
     public void update(User user) {
         template.update("UPDATE Users SET email = ?, password = ? WHERE id = ?", user.getEmail(), user.getPassword());
     }
-}
+}*/

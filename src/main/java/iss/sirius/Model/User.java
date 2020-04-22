@@ -19,9 +19,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Teacher teacher;
 
-    @OneToOne(mappedBy = "user")
-    private Pupil pupil;
-
     @Column(name = "email")
     private String email;
 

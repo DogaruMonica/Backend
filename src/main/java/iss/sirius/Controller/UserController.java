@@ -27,7 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT, consumes = "application/json")
     public void updateUser(@RequestBody User user) throws SQLException {
-        userRepository.update(user);
+        userRepository.save(user);
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
@@ -35,7 +35,7 @@ public class UserController {
         if (userRepository.findById(id).equals(Optional.empty())) {
             throw new Exception("Why remove something that doesn't exist ????");
         } else {
-            userRepository.remove(userRepository.findById(id).get());
+            userRepository.delete(userRepository.findById(id).get());
         }
     }
 
@@ -44,7 +44,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
     public Object login(@RequestBody User userAux) throws Exception {
         Optional<User> user = userRepository.findByEmailAndPassword(userAux.getEmail(), userAux.getPassword());
         if (user.isPresent()) {
@@ -52,5 +52,5 @@ public class UserController {
         } else {
             throw new Exception("Invalid email or password!");
         }
-    }
+    }*/
 }
