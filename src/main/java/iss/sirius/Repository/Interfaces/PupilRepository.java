@@ -19,3 +19,4 @@ public interface PupilRepository extends JpaRepository<Pupil, Integer> {
 //    public void update(Pupil Pupil);
 }
 
+
