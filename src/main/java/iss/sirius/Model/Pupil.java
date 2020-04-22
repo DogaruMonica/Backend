@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,9 +15,8 @@ public class Pupil{
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "classroomid", referencedColumnName = "id")
-    private Classroom classroom;
+    @Column(name="classroomid")
+    private int classroomid;
 
     @Column(name = "firstname")
     private String firstname;
@@ -77,11 +78,11 @@ public class Pupil{
         this.user = user;
     }
 
-    public Classroom getClassroom() {
-        return classroom;
+    public int getClassroom() {
+        return classroomid;
     }
 
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
-    }
+//    public void setClassroom(Classroom classroom) {
+//        this.classroom = classroom;
+//    }
 }

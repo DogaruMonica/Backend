@@ -1,6 +1,7 @@
 package iss.sirius.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +17,9 @@ public class Classroom {
     @ManyToMany(mappedBy = "subjects")
     private Set<Teacher> teachers;
 
-    @OneToMany(mappedBy = "classroom", fetch =  FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany( cascade = CascadeType.ALL, fetch =  FetchType.EAGER)
+
+    @JoinColumn(name = "classroomid" )
     private List<Pupil> pupils;
 
     @OneToOne(mappedBy = "classroom")
