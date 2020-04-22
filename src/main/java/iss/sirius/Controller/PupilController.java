@@ -30,11 +30,11 @@ public class PupilController {
     }
 
     @RequestMapping(value = "/pupil/{userid}", method = RequestMethod.POST, consumes = "application/json")
-    public void addPupil(@RequestBody Pupil pupil, @PathVariable int userid) throws Exception {
+    public Object addPupil(@RequestBody Pupil pupil, @PathVariable int userid) throws Exception {
         Optional<User> user = userRepository.findById(userid);
         if (user.isPresent()) {
             pupil.setUser(user.get());
-            pupilRepository.save(pupil);
+            return pupilRepository.save(pupil);
         }
         else {
             throw new Exception("invalid user");

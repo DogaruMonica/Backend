@@ -45,6 +45,6 @@ public class PupilImpl implements PupilRepository {
     }
 
     public void update(Pupil pupil) {
-        template.update("UPDATE Pupils SET firstname = ?, lastname = ? WHERE id = ?", pupil.getFirstname(), pupil.getLastname(), pupil.getUser().getId());
+        template.update("UPDATE Pupils SET firstname = ?, lastname = ? WHERE id = ?", pupil.getFirstname(), pupil.getLastname(), pupil.getId());
     }
 }

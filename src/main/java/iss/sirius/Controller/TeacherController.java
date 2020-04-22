@@ -29,11 +29,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/teacher/{userid}", method = RequestMethod.POST, consumes = "application/json")
-    public void addTeacher(@RequestBody Teacher teacher, @PathVariable int userid) throws Exception {
+    public Object addTeacher(@RequestBody Teacher teacher, @PathVariable int userid) throws Exception {
         Optional<User> user = userRepository.findById(userid);
         if (user.isPresent()) {
             teacher.setUser(user.get());
-            teacherRepository.save(teacher);
+            return teacherRepository.save(teacher);
         }
         else {
             throw new Exception("invalid user");

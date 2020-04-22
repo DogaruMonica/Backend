@@ -45,6 +45,6 @@ public class TeacherImpl implements TeacherRepository {
     }
 
     public void update(Teacher teacher) {
-        template.update("UPDATE Teachers SET firstname = ?, lastname = ? WHERE id = ?", teacher.getFirstname(), teacher.getLastname());
+        template.update("UPDATE Teachers SET firstname = ?, lastname = ? WHERE id = ?", teacher.getFirstname(), teacher.getLastname(), teacher.getId());
     }
 }

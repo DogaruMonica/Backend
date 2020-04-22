@@ -24,11 +24,11 @@ public class CatalogController {
     ClassroomRepository classroomRepository;
 
     @RequestMapping(value = "/catalog/{classroomid}", method = RequestMethod.POST, consumes = "application/json")
-    public void addCatalog(@RequestBody Catalog catalog, @PathVariable int classroomid) throws Exception {
+    public Object addCatalog(@RequestBody Catalog catalog, @PathVariable int classroomid) throws Exception {
         Optional<Classroom> classroom = classroomRepository.findById(classroomid);
         if (classroom.isPresent()) {
             catalog.setClassroom(classroom.get());
-            catalogRepository.save(catalog);
+            return catalogRepository.save(catalog);
         }
         else {
             throw new Exception("invalid classroom");

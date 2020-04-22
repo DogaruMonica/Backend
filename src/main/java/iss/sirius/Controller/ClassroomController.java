@@ -25,8 +25,8 @@ public class ClassroomController {
         }
 
         @RequestMapping(value = "/classroom", method = RequestMethod.POST, consumes = "application/json")
-        public void addClassroom(@RequestBody Classroom classroom) throws Exception {
-            classroomRepository.save(classroom);
+        public Object addClassroom(@RequestBody Classroom classroom) throws Exception {
+            return classroomRepository.save(classroom);
         }
 
         @RequestMapping(value = "/classroom", method = RequestMethod.PUT, consumes = "application/json")

@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
-    public void addUser(@RequestBody User user) throws Exception {
-        userRepository.save(user);
+    public Object addUser(@RequestBody User user) throws Exception {
+        return userRepository.save(user);
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT, consumes = "application/json")

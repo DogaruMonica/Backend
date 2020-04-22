@@ -46,6 +46,6 @@ public class SubjectImpl implements SubjectRepository {
     }
 
     public void update(Subject subject) {
-        template.update("UPDATE Subjects SET name = ? WHERE id = ?", subject.getName());
+        template.update("UPDATE Subjects SET name = ? WHERE id = ?", subject.getName(), subject.getId());
     }
 }

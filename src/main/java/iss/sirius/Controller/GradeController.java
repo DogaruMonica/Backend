@@ -25,8 +25,8 @@ public class GradeController {
     }
 
     @RequestMapping(value = "/grade", method = RequestMethod.POST, consumes = "application/json")
-    public void addGrade(@RequestBody Grade grade) throws Exception {
-        gradeRepository.save(grade);
+    public Object addGrade(@RequestBody Grade grade) throws Exception {
+        return gradeRepository.save(grade);
     }
 
     @RequestMapping(value = "/grade", method = RequestMethod.PUT, consumes = "application/json")

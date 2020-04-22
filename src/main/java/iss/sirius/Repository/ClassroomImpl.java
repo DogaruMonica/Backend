@@ -45,6 +45,6 @@ public class ClassroomImpl implements ClassroomRepository {
     }
 
     public void update(Classroom classroom) {
-        template.update("UPDATE Classrooms SET name = ? WHERE id = ?", classroom.getName());
+        template.update("UPDATE Classrooms SET name = ? WHERE id = ?", classroom.getName(), classroom.getId());
     }
 }

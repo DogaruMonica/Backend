@@ -39,6 +39,9 @@ public class Teacher {
     )
     Set<Subject> subjects = new HashSet<>();
 
+    @ManyToMany(mappedBy = "teachers")
+    private Set<Classroom> classrooms;
+
     public Teacher() {
     }
 

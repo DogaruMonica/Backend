@@ -45,6 +45,6 @@ public class GradeImpl implements GradeRepository {
     }
 
     public void update(Grade grade) {
-        template.update("UPDATE Grades SET pupil = ?, subject = ?, grade = ? WHERE id = ?", grade.getPupil(), grade.getSubject(), grade.getGrade());
+        template.update("UPDATE Grades SET pupil = ?, subject = ?, grade = ? WHERE id = ?", grade.getPupil(), grade.getSubject(), grade.getGrade(), grade.getId());
     }
 }
