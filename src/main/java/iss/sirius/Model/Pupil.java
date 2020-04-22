@@ -1,15 +1,6 @@
 package iss.sirius.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pupils")
@@ -18,7 +9,7 @@ public class Pupil {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 
@@ -38,7 +29,7 @@ public class Pupil {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-    }
+}
 
     public Pupil(String firstname, String lastname) {
         this.firstname = firstname;
