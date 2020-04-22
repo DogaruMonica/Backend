@@ -15,3 +15,4 @@ public interface CatalogRepository {
     public void remove(Catalog Catalog);
 
 }
+
