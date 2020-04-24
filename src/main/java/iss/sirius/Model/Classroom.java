@@ -1,8 +1,14 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +29,7 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "Classroom_Teacher",
             joinColumns = {@JoinColumn(name = "classroomid", referencedColumnName = "id")},
@@ -31,9 +37,12 @@ public class Classroom {
     )
     Set<Subject> teachers = new HashSet<>();
 
-    @OneToMany(mappedBy = "classroom")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "classroom", fetch =  FetchType.EAGER)
+    //@JoinColumn(name = "classroomid" )
     private List<Pupil> pupils;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "classroom")
     private Catalog catalog;
 

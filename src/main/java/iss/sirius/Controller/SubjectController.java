@@ -1,7 +1,10 @@
 package iss.sirius.Controller;
 
+import iss.sirius.DTO.SubjectDTO;
 import iss.sirius.Model.Subject;
-import iss.sirius.Repository.Interfaces.SubjectRepository;
+import iss.sirius.Repository.SubjectRepository;
+import iss.sirius.Repository.TeacherRepository;
+import iss.sirius.Service.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +21,16 @@ import java.util.Optional;
 public class SubjectController {
     @Autowired
     SubjectRepository subjectRepository;
+    @Autowired
+    SubjectService subjectService;
+    @Autowired
+    TeacherRepository teacherRepository;
 
     @RequestMapping(value = "/subject/{id}", method = RequestMethod.GET)
-    public Object getSubject(@PathVariable int id) {
-        return subjectRepository.findById(id);
+    public Object getSubject(@PathVariable int id) throws Exception {
+        SubjectDTO subjectDTO = subjectService.findById(id);
+        subjectDTO.setTeachers(subjectRepository.findById(id).get().getTeachers());
+        return subjectDTO;
     }
 
     @RequestMapping(value = "/subject", method = RequestMethod.POST, consumes = "application/json")
@@ -31,7 +40,7 @@ public class SubjectController {
 
     @RequestMapping(value = "/subject", method = RequestMethod.PUT, consumes = "application/json")
     public void updateSubject(@RequestBody Subject subject) throws SQLException {
-        subjectRepository.update(subject);
+        subjectRepository.save(subject);
     }
 
     @RequestMapping(value = "/subject/{id}", method = RequestMethod.DELETE)
@@ -39,7 +48,7 @@ public class SubjectController {
         if (subjectRepository.findById(id).equals(Optional.empty())) {
             throw new Exception("Why remove something that doesn't exist ????");
         } else {
-            subjectRepository.remove(subjectRepository.findById(id).get());
+            subjectRepository.delete(subjectRepository.findById(id).get());
         }
     }
 

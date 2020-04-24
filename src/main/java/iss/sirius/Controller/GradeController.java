@@ -1,7 +1,7 @@
 package iss.sirius.Controller;
 
 import iss.sirius.Model.Grade;
-import iss.sirius.Repository.Interfaces.GradeRepository;
+import iss.sirius.Repository.GradeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ public class GradeController {
 
     @RequestMapping(value = "/grade", method = RequestMethod.PUT, consumes = "application/json")
     public void updateGrade(@RequestBody Grade grade) throws SQLException {
-        gradeRepository.update(grade);
+        gradeRepository.save(grade);
     }
 
     @RequestMapping(value = "/grade/{id}", method = RequestMethod.DELETE)
@@ -39,7 +39,7 @@ public class GradeController {
         if (gradeRepository.findById(id).equals(Optional.empty())) {
             throw new Exception("Why remove something that doesn't exist ????");
         } else {
-            gradeRepository.remove(gradeRepository.findById(id).get());
+            gradeRepository.delete(gradeRepository.findById(id).get());
         }
     }
 

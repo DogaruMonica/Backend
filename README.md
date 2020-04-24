@@ -36,30 +36,54 @@ none
     - **Response body**  
     Status code 200OK for success  
 `[
-    {
-        "id": 1,
-        "email": "brigittemois@yahoo.com",
-        "password": "1",
-        "role": "admin"
-    },
-    {
-        "id": 2,
-        "email": "test@test.com",
-        "password": "1",
-        "role": "admin"
-    }
-]`
+     {
+         "id": 2,
+         "email": "test@test.com",
+         "password": "1",
+         "role": "admin"
+     },
+     {
+         "id": 3,
+         "email": "pupil@test.com",
+         "password": "1",
+         "role": "pupil"
+     },
+     {
+         "id": 4,
+         "email": "test@yahoo.com",
+         "password": "sfsd",
+         "role": null
+     },
+     {
+         "id": 5,
+         "email": "test3@yahoo.com",
+         "password": "sfsd",
+         "role": null
+     },
+     {
+         "id": 6,
+         "email": "test@test.com",
+         "password": "dsds",
+         "role": "pupil"
+     },
+     {
+         "id": 7,
+         "email": "test@test.com",
+         "password": "dsds",
+         "role": "pupil"
+     }
+ ]`
 3. _Get user by id:_ **GET** /user/{id}   </br>  
     - **Request body JSON**  
 none
     - **Response body**  
 Status code 200OK for success  
 `{
-    "id": 1,
-    "email": "brigittemois@yahoo.com",
-    "password": "1",
-    "role": "admin"
-}`
+     "id": 3,
+     "email": "pupil@test.com",
+     "password": "1",
+     "role": "pupil"
+ }`
 
 4. _Delete user by id:_ **DELETE** /user/{id}   </br>  
     - **Request body JSON**  
@@ -75,15 +99,25 @@ Status code 500InternalServerError for failure
 **Andreea needs to write this**
 
 **/pupil**  
-1. _Create a pupil:_ **POST** /pupil  </br>  
+1. _Create a pupil:_ **POST** /pupil/{userid}/{classroomid}  </br>  
     - **Request body JSON**  
 `{  
-	"email": "test@test.com",
-	"password": "1",                      
-	"role": "admin"
+	"firstname": "test",
+	"lastname": "test"
 }`  
     - **Response body**  
 Status code 200OK for success  
+{
+    "id": 5,
+    "user": {
+        "id": 7,
+        "email": "test@test.com",
+        "password": "dsds",
+        "role": "pupil"
+    },
+    "firstname": "John",
+    "lastname": "Davis"
+}
 Status code 400BadRequest for failure
 
 2. _Get all pupils:_ **GET** /pupil   </br>  
@@ -92,30 +126,40 @@ none
     - **Response body**  
     Status code 200OK for success  
 `[
-    {
-        "id": 1,
-        "email": "brigittemois@yahoo.com",
-        "password": "1",
-        "role": "admin"
-    },
-    {
-        "id": 2,
-        "email": "test@test.com",
-        "password": "1",
-        "role": "admin"
-    }
-]`
+     {
+         "id": 1,
+         "user": null,
+         "firstname": "firstnametest",
+         "lastname": "lastnametest"
+     },
+     {
+         "id": 2,
+         "user": {
+             "id": 3,
+             "email": "pupil@test.com",
+             "password": "1",
+             "role": "pupil"
+         },
+         "firstname": "test",
+         "lastname": "test"
+     }
+ ]`
 3. _Get pupil by id:_ **GET** /pupil/{id}   </br>  
     - **Request body JSON**  
 none
     - **Response body**  
 Status code 200OK for success  
 `{
-    "id": 1,
-    "email": "brigittemois@yahoo.com",
-    "password": "1",
-    "role": "admin"
-}`
+     "id": 2,
+     "user": {
+         "id": 3,
+         "email": "pupil@test.com",
+         "password": "1",
+         "role": "pupil"
+     },
+     "firstname": "test",
+     "lastname": "test"
+ }`
 
 4. _Delete pupil by id:_ **DELETE** /pupil/{id}   </br>  
     - **Request body JSON**  
@@ -148,8 +192,18 @@ none
          "id": 1,
          "firstname": "firstnametest",
          "lastname": "lastnametest",
-         "user": null,
-         "subjects": []
+         "user": {
+             "id": 2,
+             "email": "test@test.com",
+             "password": "1",
+             "role": "admin"
+         },
+         "subjects": [
+             {
+                 "id": 1,
+                 "name": "matematica"
+             }
+         ]
      }
  ]`
 3. _Get teacher by id:_ **GET** /teacher/{id}   </br>  
@@ -161,8 +215,18 @@ Status code 200OK for success
      "id": 1,
      "firstname": "firstnametest",
      "lastname": "lastnametest",
-     "user": null,
-     "subjects": []
+     "user": {
+         "id": 2,
+         "email": "test@test.com",
+         "password": "1",
+         "role": "admin"
+     },
+     "subjects": [
+         {
+             "id": 1,
+             "name": "matematica"
+         }
+     ]
  }`
 
 4. _Delete teacher by id:_ **DELETE** /teacher/{id}   </br>  
@@ -192,10 +256,23 @@ none
     Status code 200OK for success  
 `[
      {
-         "id": 1,
-         "teachers": null,
-         "pupils": null,
-         "catalog": null,
+         "id": 2,
+         "pupils": [
+             {
+                 "id": 2,
+                 "user": {
+                     "id": 3,
+                     "email": "pupil@test.com",
+                     "password": "1",
+                     "role": "pupil"
+                 },
+                 "firstname": "test",
+                 "lastname": "test"
+             }
+         ],
+         "catalog": {
+             "id": 1
+         },
          "name": "12A"
      }
  ]`
@@ -205,12 +282,25 @@ none
     - **Response body**  
 Status code 200OK for success  
 `{
-    "id": 1,
-    "teachers": null,
-    "pupils": null,
-    "catalog": null,
-    "name": "12A"
-}`
+     "id": 2,  
+     "pupils": [  
+         {  
+             "id": 2,  
+             "user": {  
+                 "id": 3,  
+                 "email": "pupil@test.com",
+                 "password": "1",
+                 "role": "pupil"
+             },
+             "firstname": "test",
+             "lastname": "test"
+         }
+     ],
+     "catalog": {
+         "id": 1
+     },
+     "name": "12A"
+ }`
 
 4. _Delete classroom by id:_ **DELETE** /classroom/{id}   </br>  
     - **Request body JSON**  
@@ -238,8 +328,7 @@ none
     Status code 200OK for success  
 `[
      {
-         "id": 1,
-         "classroom": null
+         "id": 1
      }
  ]`
 3. _Get catalog by id:_ **GET** /catalog/{id}   </br>  
@@ -248,9 +337,28 @@ none
     - **Response body**  
 Status code 200OK for success  
 `{
-    "id": 1,
-    "classroom": null
-}`
+     "id": 1,
+     "classroom": {
+         "id": 2,
+         "pupils": [
+             {
+                 "id": 2,
+                 "user": {
+                     "id": 3,
+                     "email": "pupil@test.com",
+                     "password": "1",
+                     "role": "pupil"
+                 },
+                 "firstname": "test",
+                 "lastname": "test"
+             }
+         ],
+         "catalog": {
+             "id": 1
+         },
+         "name": "12A"
+     }
+ }`
 
 4. _Delete catalog by id:_ **DELETE** /catalog/{id}   </br>  
     - **Request body JSON**  
@@ -282,7 +390,9 @@ none
 `[
      {
          "id": 1,
-         "catalog": null,
+         "catalog": {
+             "id": 1
+         },
          "pupil": 2,
          "subject": 2,
          "grade": 2
@@ -295,7 +405,9 @@ none
 Status code 200OK for success  
 `{
      "id": 1,
-     "catalog": null,
+     "catalog": {
+         "id": 1
+     },
      "pupil": 2,
      "subject": 2,
      "grade": 2
@@ -329,7 +441,6 @@ none
 `[
      {
          "id": 1,
-         "teachers": null,
          "name": "matematica"
      }
  ]`
@@ -339,11 +450,29 @@ none
     - **Response body**  
 Status code 200OK for success  
 `{
-    "id": 1,
-    "teachers": null,
-    "name": "matematica"
-}
-`
+     "id": 1,
+     "name": "matematica",
+     "teachers": [
+         {
+             "id": 1,
+             "firstname": "firstnametest",
+             "lastname": "lastnametest",
+             "user": {
+                 "id": 2,
+                 "email": "test@test.com",
+                 "password": "1",
+                 "role": "admin"
+             },
+             "subjects": [
+                 {
+                     "id": 1,
+                     "name": "matematica"
+                 }
+             ]
+         }
+     ]
+ }`
+ 
 4. _Delete subject by id:_ **DELETE** /subject/{id}   </br>  
     - **Request body JSON**  
 none

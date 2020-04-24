@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "subjects")
     private Set<Teacher> teachers;
 
