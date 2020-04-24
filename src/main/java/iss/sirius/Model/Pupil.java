@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +24,7 @@ public class Pupil {
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "classroomid", referencedColumnName = "id")
     private Classroom classroom;

@@ -2,8 +2,8 @@ package iss.sirius.Controller;
 
 import iss.sirius.Model.Teacher;
 import iss.sirius.Model.User;
-import iss.sirius.Repository.Interfaces.TeacherRepository;
-import iss.sirius.Repository.Interfaces.UserRepository;
+import iss.sirius.Repository.TeacherRepository;
+import iss.sirius.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +29,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/teacher/{userid}", method = RequestMethod.POST, consumes = "application/json")
-    public void addTeacher(@RequestBody Teacher teacher, @PathVariable int userid) throws Exception {
+    public Object addTeacher(@RequestBody Teacher teacher, @PathVariable int userid) throws Exception {
         Optional<User> user = userRepository.findById(userid);
         if (user.isPresent()) {
             teacher.setUser(user.get());
-            teacherRepository.save(teacher);
+            return teacherRepository.save(teacher);
         }
         else {
             throw new Exception("invalid user");
@@ -42,7 +42,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/teacher", method = RequestMethod.PUT, consumes = "application/json")
     public void updateTeacher(@RequestBody Teacher teacher) throws SQLException {
-        teacherRepository.update(teacher);
+        teacherRepository.save(teacher);
     }
 
     @RequestMapping(value = "/teacher/{id}", method = RequestMethod.DELETE)
@@ -50,12 +50,17 @@ public class TeacherController {
         if (teacherRepository.findById(id).equals(Optional.empty())) {
             throw new Exception("Why remove something that doesn't exist ????");
         } else {
-            teacherRepository.remove(teacherRepository.findById(id).get());
+            teacherRepository.delete(teacherRepository.findById(id).get());
         }
     }
 
     @RequestMapping(value = "/teacher", method = RequestMethod.GET)
     public Object getAllTeachers() {
         return teacherRepository.findAll();
+    }
+
+    @RequestMapping(value = "/teacher/{teacherid}/subject/{subjectid}", method = RequestMethod.POST)
+    public void attachTeacherToSubject(@PathVariable int teacherid, @PathVariable int subjectid) throws Exception {
+        teacherRepository.attachTeacherToSubject(teacherid, subjectid);
     }
 }

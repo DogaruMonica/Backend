@@ -1,14 +1,24 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,12 +29,20 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(mappedBy = "subjects")
-    private Set<Teacher> teachers;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "Classroom_Teacher",
+            joinColumns = {@JoinColumn(name = "classroomid", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "teacherid", referencedColumnName = "id")}
+    )
+    Set<Subject> teachers = new HashSet<>();
 
-    @OneToMany(mappedBy = "classroom")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "classroom", fetch =  FetchType.EAGER)
+    //@JoinColumn(name = "classroomid" )
     private List<Pupil> pupils;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "classroom")
     private Catalog catalog;
 
@@ -58,14 +76,6 @@ public class Classroom {
         this.id = id;
     }
 
-    public Set<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
-
     public List<Pupil> getPupils() {
         return pupils;
     }
@@ -94,7 +104,6 @@ public class Classroom {
     public String toString() {
         return "Classroom{" +
                 "id=" + id +
-                ", teachers=" + teachers +
                 ", pupils=" + pupils +
                 ", catalog=" + catalog +
                 ", name='" + name + '\'' +

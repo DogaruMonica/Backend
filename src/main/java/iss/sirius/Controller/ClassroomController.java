@@ -1,7 +1,7 @@
 package iss.sirius.Controller;
 
 import iss.sirius.Model.Classroom;
-import iss.sirius.Repository.Interfaces.ClassroomRepository;
+import iss.sirius.Repository.ClassroomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +25,13 @@ public class ClassroomController {
         }
 
         @RequestMapping(value = "/classroom", method = RequestMethod.POST, consumes = "application/json")
-        public void addClassroom(@RequestBody Classroom classroom) throws Exception {
-            classroomRepository.save(classroom);
+        public Object addClassroom(@RequestBody Classroom classroom) throws Exception {
+            return classroomRepository.save(classroom);
         }
 
         @RequestMapping(value = "/classroom", method = RequestMethod.PUT, consumes = "application/json")
         public void updateClassroom(@RequestBody Classroom classroom) throws SQLException {
-            classroomRepository.update(classroom);
+            classroomRepository.save(classroom);
         }
 
         @RequestMapping(value = "/classroom/{id}", method = RequestMethod.DELETE)
@@ -39,7 +39,7 @@ public class ClassroomController {
             if (classroomRepository.findById(id).equals(Optional.empty())) {
                 throw new Exception("Why remove something that doesn't exist ????");
             } else {
-                classroomRepository.remove(classroomRepository.findById(id).get());
+                classroomRepository.delete(classroomRepository.findById(id).get());
             }
         }
 

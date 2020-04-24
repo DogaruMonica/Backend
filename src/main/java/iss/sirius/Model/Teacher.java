@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,13 +33,17 @@ public class Teacher {
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "Teacher_Subject",
             joinColumns = {@JoinColumn(name = "teacherid", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "subjectid", referencedColumnName = "id")}
     )
+
     Set<Subject> subjects = new HashSet<>();
+
+    @ManyToMany(mappedBy = "teachers")
+    private Set<Classroom> classrooms;
 
     public Teacher() {
     }

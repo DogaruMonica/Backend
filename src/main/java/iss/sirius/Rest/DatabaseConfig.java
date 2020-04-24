@@ -1,4 +1,4 @@
-package iss.sirius.Service;
+package iss.sirius.Rest;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

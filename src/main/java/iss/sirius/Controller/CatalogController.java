@@ -1,9 +1,11 @@
 package iss.sirius.Controller;
 
+import iss.sirius.DTO.CatalogDTO;
 import iss.sirius.Model.Catalog;
 import iss.sirius.Model.Classroom;
-import iss.sirius.Repository.Interfaces.CatalogRepository;
-import iss.sirius.Repository.Interfaces.ClassroomRepository;
+import iss.sirius.Repository.CatalogRepository;
+import iss.sirius.Repository.ClassroomRepository;
+import iss.sirius.Service.CatalogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
@@ -22,13 +23,15 @@ public class CatalogController {
     CatalogRepository catalogRepository;
     @Autowired
     ClassroomRepository classroomRepository;
+    @Autowired
+    CatalogService catalogService;
 
     @RequestMapping(value = "/catalog/{classroomid}", method = RequestMethod.POST, consumes = "application/json")
-    public void addCatalog(@RequestBody Catalog catalog, @PathVariable int classroomid) throws Exception {
+    public Object addCatalog(@RequestBody Catalog catalog, @PathVariable int classroomid) throws Exception {
         Optional<Classroom> classroom = classroomRepository.findById(classroomid);
         if (classroom.isPresent()) {
             catalog.setClassroom(classroom.get());
-            catalogRepository.save(catalog);
+            return catalogRepository.save(catalog);
         }
         else {
             throw new Exception("invalid classroom");
@@ -36,8 +39,10 @@ public class CatalogController {
     }
 
     @RequestMapping(value = "/catalog/{id}", method = RequestMethod.GET)
-    public Object getCatalog(@PathVariable int id) {
-        return catalogRepository.findById(id);
+    public Object getCatalog(@PathVariable int id) throws Exception {
+        CatalogDTO catalogDTO = catalogService.findById(id);
+        catalogDTO.setClassroom(classroomRepository.findById(catalogRepository.findById(id).get().getClassroom().getId()).get());
+        return catalogDTO;
     }
 
     @RequestMapping(value = "/catalog/{id}", method = RequestMethod.DELETE)
@@ -45,7 +50,7 @@ public class CatalogController {
         if (catalogRepository.findById(id).equals(Optional.empty())) {
             throw new Exception("Why remove something that doesn't exist ????");
         } else {
-            catalogRepository.remove(catalogRepository.findById(id).get());
+            catalogRepository.delete(catalogRepository.findById(id).get());
         }
     }
 
