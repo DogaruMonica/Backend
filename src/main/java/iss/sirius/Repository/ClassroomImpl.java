@@ -1,11 +1,8 @@
 package iss.sirius.Repository;
 
 import iss.sirius.Model.Classroom;
-import iss.sirius.Model.Subject;
 import iss.sirius.Repository.Interfaces.ClassroomRepository;
 import iss.sirius.Repository.Mappers.ClassroomMapper;
-import iss.sirius.Repository.Mappers.SubjectMapper;
-import iss.sirius.Repository.Mappers.TeacherMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,10 +46,5 @@ public class ClassroomImpl implements ClassroomRepository {
 
     public void update(Classroom classroom) {
         template.update("UPDATE Classrooms SET name = ? WHERE id = ?", classroom.getName());
-    }
-
-    @Override
-    public List<Subject> getSubjects(int classroomID) {
-        return template.query("SELECT Subjects.* FROM Subjects INNER JOIN classroom_subject ON Subjects.id = classroom_subject.subjectid AND classroom_subject.classroomid = ?", new SubjectMapper(), classroomID);
     }
 }

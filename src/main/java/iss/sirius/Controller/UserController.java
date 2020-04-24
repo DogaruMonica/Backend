@@ -44,7 +44,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value = "/user/login", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
     public Object login(@RequestBody User userAux) throws Exception {
         Optional<User> user = userRepository.findByEmailAndPassword(userAux.getEmail(), userAux.getPassword());
         if (user.isPresent()) {

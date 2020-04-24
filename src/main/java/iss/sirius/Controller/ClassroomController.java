@@ -1,7 +1,6 @@
 package iss.sirius.Controller;
 
 import iss.sirius.Model.Classroom;
-import iss.sirius.Model.Subject;
 import iss.sirius.Repository.Interfaces.ClassroomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -48,10 +46,5 @@ public class ClassroomController {
         @RequestMapping(value = "/classroom", method = RequestMethod.GET)
         public Object getAllClassrooms() {
             return classroomRepository.findAll();
-        }
-
-        @RequestMapping(value ="/classroom/{id}/subject", method = RequestMethod.GET)
-        public List<Subject> getAllSubjectsOfClassroom(@PathVariable int id) {
-            return classroomRepository.getSubjects(id);
         }
 }

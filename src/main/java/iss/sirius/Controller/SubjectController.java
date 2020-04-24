@@ -24,8 +24,6 @@ public class SubjectController {
         return subjectRepository.findById(id);
     }
 
-
-
     @RequestMapping(value = "/subject", method = RequestMethod.POST, consumes = "application/json")
     public void addSubject(@RequestBody Subject subject) throws Exception {
         subjectRepository.save(subject);
