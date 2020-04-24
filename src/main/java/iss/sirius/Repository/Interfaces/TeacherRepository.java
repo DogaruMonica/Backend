@@ -1,6 +1,5 @@
 package iss.sirius.Repository.Interfaces;
 
-import iss.sirius.Model.Subject;
 import iss.sirius.Model.Teacher;
 
 import java.util.List;
@@ -17,8 +16,4 @@ public interface TeacherRepository {
     public void remove(Teacher Teacher);
 
     public void update(Teacher Teacher);
-
-    public List<Teacher> getSubject(int subjectID);
-
-    public Integer attachSubject(int teacherid, int subjectid);
 }

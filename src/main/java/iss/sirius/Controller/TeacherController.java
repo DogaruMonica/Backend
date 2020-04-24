@@ -1,6 +1,5 @@
 package iss.sirius.Controller;
 
-import iss.sirius.Model.Subject;
 import iss.sirius.Model.Teacher;
 import iss.sirius.Model.User;
 import iss.sirius.Repository.Interfaces.TeacherRepository;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -59,19 +57,5 @@ public class TeacherController {
     @RequestMapping(value = "/teacher", method = RequestMethod.GET)
     public Object getAllTeachers() {
         return teacherRepository.findAll();
-    }
-
-    @RequestMapping(value = "/teacher/subject/{id}", method = RequestMethod.GET)
-    public List<Teacher> getAllTeachersBySubject(@PathVariable int id) {
-        return teacherRepository.getSubject(id);
-    }
-
-    @RequestMapping(value = "/teacher/{teacherid}/subject/{subjectid}", method = RequestMethod.POST)
-    public void connectTeacherToSubject(@PathVariable int teacherid, @PathVariable int subjectid) throws Exception {
-        if (teacherRepository.findById(teacherid).equals(Optional.empty())) {
-            throw new Exception("There is no teacher with that id!");
-        } else {
-            teacherRepository.attachSubject(teacherid, subjectid);
-        }
     }
 }

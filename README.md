@@ -71,15 +71,8 @@ Status code 500InternalServerError for failure
 5. _Update user by id:_ **PUT** /user   </br>  
 **needs fixing - do not use**
 
-6. _Check if user exists for login:_ **POST** /user/login   </br>  
-    - **Request body JSON**  
-`{  
-	"email": "test@test.com",
-	"password": "test",                      
-}`
-    - **Response body**  
-Status code 200OK for success  
-Status code 500InternalServerError for failure
+6. _Check if user exists for login:_ **GET** /user/login   </br>  
+**Andreea needs to write this**
 
 **/pupil**  
 1. _Create a pupil:_ **POST** /pupil  </br>  
@@ -182,13 +175,6 @@ Status code 500InternalServerError for failure
 5. _Update teacher by id:_ **PUT** /teacher   </br>  
 **needs fixing - do not use**
 
-6. _Attach teacher to subject by id:_ **POST** /teacher/{teacherid}/subject/{subjectid}   </br>  
-       - **Request body JSON**  
-   none
-       - **Response body**  
-   Status code 200OK for success  
-   Status code 500InternalServerError for failure  
-
 **/classroom**  
 1. _Create a classroom:_ **POST** /classroom  </br>  
     - **Request body JSON**  
@@ -235,13 +221,6 @@ Status code 500InternalServerError for failure
 
 5. _Update classroom by id:_ **PUT** /classroom   </br>  
 **needs fixing - do not use**
-
-6. _Get all subjects for a given classroom id:_  **GET** /classroom/{id}/subject </br>  
-    - **Request body JSON**  
-none
-    - **Response body**  
-Status code 200OK for success  
-Status code 500InternalServerError for failure  
 
 **/catalog**  
 1. _Create a catalog:_ **POST** /catalog/{classroomid}  </br>  
@@ -374,12 +353,6 @@ Status code 500InternalServerError for failure
 
 5. _Update subject by id:_ **PUT** /subject   </br>  
 **needs fixing - do not use**
-
-6. _Get all teachers for a given subject id:_  **GET** /teacher/subject/{id} </br>  
-    - **Request body JSON**  
-none
-    - **Response body**  
-Status code 200OK for success  
-Status code 500InternalServerError for failure  
+ 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

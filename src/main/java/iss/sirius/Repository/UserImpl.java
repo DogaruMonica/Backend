@@ -51,6 +51,6 @@ public class UserImpl implements UserRepository {
     }
 
     public void update(User user) {
-        template.update("UPDATE Users SET email = ?, password = ? WHERE id = ?", user.getEmail(), user.getPassword(), user.getId());
+        template.update("UPDATE Users SET email = ?, password = ? WHERE id = ?", user.getEmail(), user.getPassword());
     }
 }
