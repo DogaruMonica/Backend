@@ -1,5 +1,6 @@
 package iss.sirius.Repository;
 
+import iss.sirius.Model.Subject;
 import iss.sirius.Model.Teacher;
 import iss.sirius.Repository.Interfaces.TeacherRepository;
 import iss.sirius.Repository.Mappers.TeacherMapper;
@@ -46,5 +47,15 @@ public class TeacherImpl implements TeacherRepository {
 
     public void update(Teacher teacher) {
         template.update("UPDATE Teachers SET firstname = ?, lastname = ? WHERE id = ?", teacher.getFirstname(), teacher.getLastname());
+    }
+
+    @Override
+    public List<Teacher> getSubject(int subjectID) {
+        return template.query("SELECT Teachers.* FROM Teachers INNER JOIN teacher_subject ON Teachers.id = teacher_subject.teacherid AND teacher_subject.subjectid = ?", new TeacherMapper(), subjectID);
+    }
+
+    @Override
+    public Integer attachSubject(int teacherid, int subjectid) {
+        return template.update("INSERT INTO teacher_subject (teacherid, subjectid) VALUES (?, ?)", teacherid, subjectid);
     }
 }
