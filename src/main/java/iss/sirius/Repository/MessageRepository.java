@@ -1,11 +1,9 @@
 package iss.sirius.Repository;
 
-import iss.sirius.Model.User;
+import iss.sirius.Model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByEmail(String email);
+public interface MessageRepository extends JpaRepository<Message, Integer> {
 }
-

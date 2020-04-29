@@ -33,13 +33,12 @@ public class Teacher {
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private User user;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Teacher_Subject",
             joinColumns = {@JoinColumn(name = "teacherid", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "subjectid", referencedColumnName = "id")}
     )
-
     Set<Subject> subjects = new HashSet<>();
 
     @ManyToMany(mappedBy = "teachers")
