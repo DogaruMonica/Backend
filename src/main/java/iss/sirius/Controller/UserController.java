@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
