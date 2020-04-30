@@ -66,6 +66,11 @@ public class MessageController {
         return messageRepository.findAll();
     }
 
+    @RequestMapping(value = "/chatroom/{id}/message", method = RequestMethod.GET)
+    public Object getAllChatroomMessages(@PathVariable int id) throws Exception {
+        return messageRepository.findByChatroom(id);
+    }
+
     @EventListener(CreateMessageEvent.class)
     public void handleEvent(CreateMessageEvent event) {
         System.out.println(event.toString());
