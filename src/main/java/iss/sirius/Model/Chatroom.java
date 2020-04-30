@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ public class Chatroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "chatroom", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<ClassroomSubjectChatroom> classroomSubjectChatrooms;
 
