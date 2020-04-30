@@ -5,7 +5,6 @@ import iss.sirius.Repository.CatalogRepositoryTest;
 import iss.sirius.Repository.ClassroomRepositoryTest;
 import iss.sirius.Repository.GradeRepositoryTest;
 import iss.sirius.Repository.PupilRepositoryTest;
-import iss.sirius.Repository.SubjectRepository;
 import iss.sirius.Repository.SubjectRepositoryTest;
 import iss.sirius.Repository.TeacherRepositoryTest;
 import iss.sirius.Repository.UserRepositoryTest;
