@@ -5,7 +5,9 @@ import iss.sirius.Repository.UserRepository;
 import iss.sirius.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -26,6 +28,9 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
     public Object addUser(@RequestBody User user) throws Exception {
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use!");
+        }
         return userRepository.save(user);
     }
 
