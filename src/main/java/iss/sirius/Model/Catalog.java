@@ -1,7 +1,6 @@
 package iss.sirius.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,7 +24,10 @@ public class Catalog {
     @JoinColumn(name = "classroomid", referencedColumnName = "id")
     private Classroom classroom;
 
-    public Catalog() {};
+    public Catalog() {
+    }
+
+    ;
 
     public Catalog(int id) {
         this.id = id;

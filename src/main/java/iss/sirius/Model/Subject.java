@@ -2,12 +2,14 @@ package iss.sirius.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
@@ -22,6 +24,9 @@ public class Subject {
     @ManyToMany(mappedBy = "subjects")
     private Set<Teacher> teachers;
 
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<ClassroomSubjectChatroom> classroomSubjectChatrooms;
+
     @Column(name = "name")
     private String name;
 
@@ -30,6 +35,10 @@ public class Subject {
 
     public Subject(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Subject(String name) {
         this.name = name;
     }
 

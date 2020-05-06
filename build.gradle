@@ -36,20 +36,18 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.2.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.6.RELEASE'
-
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '2.2.6.RELEASE'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.1.RELEASE'
-
     compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.1.2.Final'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.13.Final'
-    
     compile group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
-
     compile group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
-
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
-
     compile group: 'org.projectlombok', name: 'lombok', version: "$lombokVersion"
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.6.RELEASE'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
 
 test {

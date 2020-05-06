@@ -49,4 +49,5 @@ public class ClassroomController {
         public Object getAllClassrooms() {
             return classroomRepository.findAll();
         }
+
 }
