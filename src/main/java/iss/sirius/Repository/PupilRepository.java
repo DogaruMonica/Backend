@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PupilRepository extends JpaRepository<Pupil, Integer> {
+      Pupil findByUserId (int userid);
 
 }

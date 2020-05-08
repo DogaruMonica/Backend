@@ -40,6 +40,10 @@ public class ClassroomSubjectChatroomController {
     public Object getClassroomSubjectChatroom(@PathVariable int id) {
         return classroomSubjectChatroomRepository.findById(id);
     }
+    @RequestMapping(value = "classroom/classroomSubjectChatroom/{id}", method = RequestMethod.GET)
+    public Object getClassroomSubjectChatroomOfClassroom(@PathVariable int id) {
+        return classroomSubjectChatroomRepository.findAllByClassroom_Id(id);
+    }
 
     @RequestMapping(value = "/classroom/{classroomId}/{subjectId}", method = RequestMethod.POST)
     public Object addClassroomSubjectChatroom(@PathVariable int classroomId, @PathVariable int subjectId) throws Exception {

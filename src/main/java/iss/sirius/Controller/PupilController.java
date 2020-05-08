@@ -34,6 +34,15 @@ public class PupilController {
     public Object getPupil(@PathVariable int id) {
         return pupilRepository.findById(id);
     }
+    @RequestMapping(value = "/classroom/pupil/{id}", method = RequestMethod.GET)
+    public Object getPupilC(@PathVariable int id) {
+        Pupil p=pupilRepository.findById(id).get();
+        return p.getClassroom();
+    }
+    @RequestMapping(value = "/pupil/user/{idUser}", method = RequestMethod.GET)
+    public Object getPupilByUser(@PathVariable int idUser) {
+        return pupilRepository.findByUserId(idUser);
+    }
 
     @RequestMapping(value = "/pupil/{userid}/{classroomid}", method = RequestMethod.POST, consumes = "application/json")
     public Object addPupil(@RequestBody Pupil pupil, @PathVariable int userid, @PathVariable int classroomid) throws Exception {
