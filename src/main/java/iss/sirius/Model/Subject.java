@@ -27,6 +27,9 @@ public class Subject {
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<ClassroomSubjectChatroom> classroomSubjectChatrooms;
 
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<ClassroomSubjectTeacher> classroomSubjectTeachers;
+
     @Column(name = "name")
     private String name;
 

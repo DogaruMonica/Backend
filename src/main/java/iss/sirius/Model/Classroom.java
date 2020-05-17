@@ -29,14 +29,6 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Classroom_Teacher",
-            joinColumns = {@JoinColumn(name = "classroomid", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "teacherid", referencedColumnName = "id")}
-    )
-    Set<Teacher> teachers = new HashSet<>();
-
     @JsonManagedReference
     @OneToMany(mappedBy = "classroom", fetch =  FetchType.EAGER)
     private List<Pupil> pupils;
@@ -47,6 +39,9 @@ public class Classroom {
 
     @OneToMany(mappedBy = "classroom", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<ClassroomSubjectChatroom> classroomSubjectChatrooms;
+
+    @OneToMany(mappedBy = "classroom", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<ClassroomSubjectTeacher> classroomSubjectTeachers;
 
     @Column(name = "name")
     private String name;

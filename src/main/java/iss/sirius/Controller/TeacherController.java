@@ -1,7 +1,12 @@
 package iss.sirius.Controller;
 
+import iss.sirius.Model.Classroom;
+import iss.sirius.Model.ClassroomSubjectChatroom;
+import iss.sirius.Model.ClassroomSubjectTeacher;
 import iss.sirius.Model.Teacher;
 import iss.sirius.Model.User;
+import iss.sirius.Repository.ClassroomSubjectChatroomRepository;
+import iss.sirius.Repository.ClassroomSubjectTeacherRepository;
 import iss.sirius.Repository.TeacherRepository;
 import iss.sirius.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,6 +31,10 @@ public class TeacherController {
     TeacherRepository teacherRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ClassroomSubjectChatroomRepository classroomSubjectChatroomRepository;
+    @Autowired
+    ClassroomSubjectTeacherRepository classroomSubjectTeacherRepository;
 
     @RequestMapping(value = "/teacher/{id}", method = RequestMethod.GET)
     public Object getTeacher(@PathVariable int id) {
@@ -36,8 +47,7 @@ public class TeacherController {
         if (user.isPresent()) {
             teacher.setUser(user.get());
             return teacherRepository.save(teacher);
-        }
-        else {
+        } else {
             throw new Exception("invalid user");
         }
     }
@@ -64,5 +74,17 @@ public class TeacherController {
     @RequestMapping(value = "/teacher/{teacherid}/subject/{subjectid}", method = RequestMethod.POST)
     public void attachTeacherToSubject(@PathVariable int teacherid, @PathVariable int subjectid) throws Exception {
         teacherRepository.attachTeacherToSubject(teacherid, subjectid);
+    }
+
+    @RequestMapping(value = "/teacher/{teacherid}/chatrooms", method = RequestMethod.GET)
+    public Object getClassroomSubject(@PathVariable int teacherid) {
+        Teacher teacher = teacherRepository.findById(teacherid).get();
+        List<ClassroomSubjectChatroom> classroomSubjectChatrooms = null;
+        List<ClassroomSubjectTeacher> classroomSubjectTeachers = classroomSubjectTeacherRepository.findByTeacher(teacher);
+        for (ClassroomSubjectTeacher classroomSubjectTeacher : classroomSubjectTeachers) {
+            ClassroomSubjectChatroom classroomSubjectChatroom = classroomSubjectChatroomRepository.findByClassroomAndSubject(classroomSubjectTeacher.getClassroom().getId(), classroomSubjectTeacher.getSubject().getId());
+            classroomSubjectChatrooms.add(classroomSubjectChatroom);
+        }
+        return classroomSubjectChatrooms;
     }
 }

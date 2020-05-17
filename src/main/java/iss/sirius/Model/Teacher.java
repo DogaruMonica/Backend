@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -41,8 +42,8 @@ public class Teacher {
     )
     Set<Subject> subjects = new HashSet<>();
 
-    @ManyToMany(mappedBy = "teachers")
-    private Set<Classroom> classrooms;
+    @OneToMany(mappedBy = "teacher", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<ClassroomSubjectTeacher> classroomSubjectTeachers;
 
     public Teacher() {
     }
@@ -88,15 +89,6 @@ public class Teacher {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname +
-                '}';
     }
 
     public User getUser() {
