@@ -13,8 +13,8 @@ import java.util.List;
 public interface ClassroomSubjectChatroomRepository extends JpaRepository<ClassroomSubjectChatroom, Integer> {
     ClassroomSubjectChatroom findByClassroom(Classroom classroom);
 
-    @Query(value = "SELECT * FROM classroom_subject_chatroom csc where csc.classroom_id = : classroomid AND csc.subject_id =: subjectid", nativeQuery = true)
-    ClassroomSubjectChatroom findByClassroomAndSubject(@Param("classroomid") int classroomid, @Param("subjectid") int subjectid);
+    @Query(value = "SELECT * FROM classroom_subject_chatroom csc where csc.classroom_id = :classroom_id AND csc.subject_id = :subject_id", nativeQuery = true)
+    ClassroomSubjectChatroom findByClassroomAndSubject(@Param("classroom_id") int classroom_id, @Param("subject_id") int subject_id);
 
     List<ClassroomSubjectChatroom> findAllByClassroom_Id(int classid);
 }

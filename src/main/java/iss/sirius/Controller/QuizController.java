@@ -65,10 +65,16 @@ public class QuizController {
     }
 
     @RequestMapping(value = "/quiz/{id}/toggleactive", method = RequestMethod.PUT)
-    public void toggleActive(@PathVariable int id) throws SQLException {
+    public Object toggleActive(@PathVariable int id) throws SQLException {
         Quiz quiz = quizRepository.findById(id).get();
-        quiz.setActive(!quiz.getActive());
-        quizRepository.save(quiz);
+        System.out.println(quiz);
+        if (quiz.getActive() == true) {
+            quiz.setActive(false);
+        } else {
+            quiz.setActive(true);
+        }
+        System.out.println(quiz);
+        return quizRepository.save(quiz);
     }
 
     @RequestMapping(value = "/quiz/{id}", method = RequestMethod.DELETE)
@@ -92,6 +98,7 @@ public class QuizController {
         QuizPupil quizPupil = quizPupilRepository.findByPupilidAndQuizid(pupilId, quizId);
         if (question.get().getCorrectAnswer().equals(answer)) {
             quizPupil.setScore(quizPupil.getScore() + 1);
+            quizPupilRepository.save(quizPupil);
         }
     }
 

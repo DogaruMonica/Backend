@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -79,7 +80,7 @@ public class TeacherController {
     @RequestMapping(value = "/teacher/{teacherid}/chatrooms", method = RequestMethod.GET)
     public Object getClassroomSubject(@PathVariable int teacherid) {
         Teacher teacher = teacherRepository.findById(teacherid).get();
-        List<ClassroomSubjectChatroom> classroomSubjectChatrooms = null;
+        List<ClassroomSubjectChatroom> classroomSubjectChatrooms = new ArrayList<>();
         List<ClassroomSubjectTeacher> classroomSubjectTeachers = classroomSubjectTeacherRepository.findByTeacher(teacher);
         for (ClassroomSubjectTeacher classroomSubjectTeacher : classroomSubjectTeachers) {
             ClassroomSubjectChatroom classroomSubjectChatroom = classroomSubjectChatroomRepository.findByClassroomAndSubject(classroomSubjectTeacher.getClassroom().getId(), classroomSubjectTeacher.getSubject().getId());

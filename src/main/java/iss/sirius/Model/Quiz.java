@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,10 +30,12 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = {CascadeType.ALL})
     private Set<Question> questions;
 
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "classroomSubjectChatroom_id", referencedColumnName = "id")
     private ClassroomSubjectChatroom classroomSubjectChatroom;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "quiz", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<QuizPupil> quizPupils;
 
@@ -106,5 +110,17 @@ public class Quiz {
 
     public void setQuizPupils(Set<QuizPupil> quizPupils) {
         this.quizPupils = quizPupils;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", active=" + active +
+                ", questions=" + questions +
+                ", classroomSubjectChatroom=" + classroomSubjectChatroom +
+                ", quizPupils=" + quizPupils +
+                '}';
     }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface QuizPupilRepository extends JpaRepository<QuizPupil, Integer> {
-    @Query(value = "SELECT * FROM quiz_pupil qp where qp.pupilid = : pupilid AND qp.quizid =: quizid", nativeQuery = true)
+    @Query(value = "SELECT * FROM quiz_pupil qp where qp.pupilid = :pupilid AND qp.quizid = :quizid", nativeQuery = true)
     QuizPupil findByPupilidAndQuizid(@Param("pupilid") int pupilid, @Param("quizid") int quizid);
 }

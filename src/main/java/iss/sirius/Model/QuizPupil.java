@@ -68,4 +68,14 @@ public class QuizPupil {
     public void setPupil(Pupil pupil) {
         this.pupil = pupil;
     }
+
+    @Override
+    public String toString() {
+        return "QuizPupil{" +
+                "id=" + id +
+                ", score=" + score +
+                ", quiz=" + quiz +
+                ", pupil=" + pupil +
+                '}';
+    }
 }

@@ -7,9 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
 
 @Entity
 @Table(name = "classroom_subject_teacher")
@@ -30,6 +28,16 @@ public class ClassroomSubjectTeacher {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
+    public ClassroomSubjectTeacher() {
+
+    }
+
+    public ClassroomSubjectTeacher(int id, Classroom classroom, Subject subject, Teacher teacher) {
+        this.id = id;
+        this.classroom = classroom;
+        this.subject = subject;
+        this.teacher = teacher;
+    }
 
     public ClassroomSubjectTeacher(Classroom classroom, Subject subject, Teacher teacher) {
         this.classroom = classroom;
