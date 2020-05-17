@@ -59,6 +59,16 @@ public class PupilController {
         pupilRepository.save(pupil);
     }
 
+    @RequestMapping(value = "/classroom/pupil/{id}", method = RequestMethod.GET)
+    public Object getPupilC(@PathVariable int id) {
+        Pupil p=pupilRepository.findById(id).get();
+        return p.getClassroom();
+    }
+    @RequestMapping(value = "/pupil/user/{idUser}", method = RequestMethod.GET)
+    public Object getPupilByUser(@PathVariable int idUser) {
+        return pupilRepository.findByUserId(idUser);
+    }
+
     @RequestMapping(value = "/pupil/{id}", method = RequestMethod.DELETE)
     public void removePupil(@PathVariable int id) throws Exception {
         if (pupilRepository.findById(id).equals(Optional.empty())) {

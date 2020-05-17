@@ -51,6 +51,11 @@ public class ClassroomSubjectChatroomController {
         return classroomSubjectChatroomRepository.save(classroomSubjectChatroom);
     }
 
+    @RequestMapping(value = "classroom/classroomSubjectChatroom/{id}", method = RequestMethod.GET)
+    public Object getClassroomSubjectChatroomOfClassroom(@PathVariable int id) {
+        return classroomSubjectChatroomRepository.findAllByClassroom_Id(id);
+    }
+
     @RequestMapping(value = "/classroomSubjectChatroom", method = RequestMethod.PUT, consumes = "application/json")
     public void updateClassroomSubjectChatroom(@RequestBody ClassroomSubjectChatroom classroomSubjectChatroom) throws SQLException {
         classroomSubjectChatroomRepository.save(classroomSubjectChatroom);
