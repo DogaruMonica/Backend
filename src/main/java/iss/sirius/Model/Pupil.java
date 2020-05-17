@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "pupils")
@@ -34,6 +36,9 @@ public class Pupil {
 
     @Column(name = "lastname")
     private String lastname;
+
+    @OneToMany(mappedBy = "pupil", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<QuizPupil> quizPupils;
 
     public Pupil(){}
 

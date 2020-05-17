@@ -44,6 +44,13 @@ public class Grade {
         this.grade = grade;
     }
 
+    public Grade(Catalog catalog, int pupil, int subject, int grade) {
+        this.catalog = catalog;
+        this.pupil = pupil;
+        this.subject = subject;
+        this.grade = grade;
+    }
+
     public int getId() {
         return id;
     }

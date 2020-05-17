@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "catalogs")
@@ -24,10 +26,11 @@ public class Catalog {
     @JoinColumn(name = "classroomid", referencedColumnName = "id")
     private Classroom classroom;
 
-    public Catalog() {
-    }
+    @OneToMany(mappedBy = "catalog", cascade = CascadeType.ALL)
+    private Set<Grade> grades;
 
-    ;
+    public Catalog() { };
+
 
     public Catalog(int id) {
         this.id = id;
@@ -39,13 +42,6 @@ public class Catalog {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Catalog{" +
-                "id=" + id +
-                '}';
     }
 
     public Classroom getClassroom() {

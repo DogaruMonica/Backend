@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "classroom_subject_chatroom")
@@ -27,6 +29,9 @@ public class ClassroomSubjectChatroom {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "chatroom_id", referencedColumnName = "id")
     private Chatroom chatroom;
+
+    @OneToMany(mappedBy = "classroomSubjectChatroom", cascade = {CascadeType.ALL})
+    private Set<Quiz> quizzes;
 
     public ClassroomSubjectChatroom() {
     }
