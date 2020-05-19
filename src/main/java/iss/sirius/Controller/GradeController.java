@@ -1,7 +1,9 @@
 package iss.sirius.Controller;
 
 import iss.sirius.Model.Grade;
+import iss.sirius.Model.Pupil;
 import iss.sirius.Repository.GradeRepository;
+import iss.sirius.Repository.PupilRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,10 +22,18 @@ import java.util.Optional;
 public class GradeController {
     @Autowired
     GradeRepository gradeRepository;
+    @Autowired
+    PupilRepository pupilRepository;
 
     @RequestMapping(value = "/grade/{id}", method = RequestMethod.GET)
     public Object getGrade(@PathVariable int id) {
         return gradeRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/grade/pupil/{id}", method = RequestMethod.GET)
+    public Object getPupilGrades(@PathVariable int id) {
+        Pupil pupil = pupilRepository.findByUserId(id);
+        return gradeRepository.findByPupil(pupil.getId());
     }
 
     @RequestMapping(value = "/grade", method = RequestMethod.POST, consumes = "application/json")
