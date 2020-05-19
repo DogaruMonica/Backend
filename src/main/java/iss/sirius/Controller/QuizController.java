@@ -47,6 +47,12 @@ public class QuizController {
         return quizRepository.findById(id);
     }
 
+    @RequestMapping(value = "/quiz/classroomSubjectChatroom/{id}", method = RequestMethod.GET)
+    public Object getQuizCSC(@PathVariable int id) {
+        Optional<ClassroomSubjectChatroom> classroomSubjectChatroom = classroomSubjectChatroomRepository.findById(id);
+        return quizRepository.findByClassroomSubjectChatroom(classroomSubjectChatroom.get());
+    }
+
     @RequestMapping(value = "/quiz/{id}", method = RequestMethod.POST, consumes = "application/json")
     public Object addQuiz(@RequestBody Quiz quiz, @PathVariable int id) throws Exception {
         Optional<ClassroomSubjectChatroom> classroomSubjectChatroom = classroomSubjectChatroomRepository.findById(id);
