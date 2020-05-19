@@ -17,4 +17,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
     @Query(value = "INSERT into Teacher_Subject(teacherid, subjectid) VALUES (:teacherid, :subjectid)", nativeQuery = true)
     @Transactional
     void attachTeacherToSubject(@Param("teacherid") int teacherid, @Param("subjectid") int subjectid);
+    Teacher findByUserId (int userid);
 }

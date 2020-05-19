@@ -88,4 +88,9 @@ public class TeacherController {
         }
         return classroomSubjectChatrooms;
     }
+
+    @RequestMapping(value = "/teacher/user/{idUser}", method = RequestMethod.GET)
+    public Object getTeacherByUser(@PathVariable int idUser) {
+        return teacherRepository.findByUserId(idUser);
+    }
 }
