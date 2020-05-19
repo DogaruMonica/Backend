@@ -56,4 +56,10 @@ public class ClassroomSubjectTeacherController {
     public Object getAllClassroomSubjectTeachers() {
         return classroomSubjectTeacherRepository.findAll();
     }
+
+    @RequestMapping(value = "/classroomSubjectTeacher/{classroomid}", method = RequestMethod.GET)
+    public Object getTeachersPerClassroom(@PathVariable int classroomid) {
+        Classroom classroom = classroomRepository.findById(classroomid).get();
+        return classroomSubjectTeacherRepository.findByClassroom(classroom);
+    }
 }
