@@ -41,14 +41,13 @@ public class ClassroomSubjectChatroomController {
         return classroomSubjectChatroomRepository.findById(id);
     }
 
-    @RequestMapping(value = "/classroom/{classroomId}/{subjectId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/classroom/{classroomId}/subject/{subjectId}", method = RequestMethod.POST)
     public Object addClassroomSubjectChatroom(@PathVariable int classroomId, @PathVariable int subjectId) throws Exception {
-        Chatroom chatroom = new Chatroom();
-        chatroom = chatroomRepository.save(chatroom);
+        Chatroom chatroom = chatroomRepository.save(new Chatroom());
         Classroom classroom = classroomRepository.findById(classroomId).get();
         Subject subject = subjectRepository.findById(subjectId).get();
-        ClassroomSubjectChatroom classroomSubjectChatroom = new ClassroomSubjectChatroom(classroom, subject, chatroom);
-        return classroomSubjectChatroomRepository.save(classroomSubjectChatroom);
+        ClassroomSubjectChatroom classroomSubjectChatroom = classroomSubjectChatroomRepository.save(new ClassroomSubjectChatroom(classroom, subject, chatroom));
+        return classroomSubjectChatroom;
     }
 
     @RequestMapping(value = "classroom/classroomSubjectChatroom/{id}", method = RequestMethod.GET)
