@@ -7,12 +7,14 @@ import iss.sirius.Repository.TeacherRepository;
 import iss.sirius.Service.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -37,6 +39,9 @@ public class SubjectController {
 
     @RequestMapping(value = "/subject", method = RequestMethod.POST, consumes = "application/json")
     public Object addSubject(@RequestBody Subject subject) throws Exception {
+        if (subjectRepository.findByName(subject.getName()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Subject already exists!");
+        }
         return subjectRepository.save(subject);
     }
 
