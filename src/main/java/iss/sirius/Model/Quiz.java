@@ -35,7 +35,6 @@ public class Quiz {
     @JoinColumn(name = "classroomSubjectChatroom_id", referencedColumnName = "id")
     private ClassroomSubjectChatroom classroomSubjectChatroom;
 
-    @JsonBackReference
     @OneToMany(mappedBy = "quiz", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<QuizPupil> quizPupils;
 
