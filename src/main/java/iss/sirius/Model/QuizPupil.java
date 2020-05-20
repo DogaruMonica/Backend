@@ -1,5 +1,7 @@
 package iss.sirius.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ public class QuizPupil {
     @Column(name = "score")
     private int score;
 
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "quizid", referencedColumnName = "id")
     private Quiz quiz;
