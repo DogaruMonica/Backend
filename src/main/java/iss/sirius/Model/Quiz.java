@@ -49,7 +49,6 @@ public class Quiz {
     public Quiz(String name, ClassroomSubjectChatroom classroomSubjectChatroom) {
         this.name = name;
         this.classroomSubjectChatroom = classroomSubjectChatroom;
-        this.active = false;
     }
 
     public Quiz(int id, String name, Set<Question> questions) {

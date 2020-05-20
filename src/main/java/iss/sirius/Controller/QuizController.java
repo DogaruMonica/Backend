@@ -57,6 +57,7 @@ public class QuizController {
     public Object addQuiz(@RequestBody Quiz quiz, @PathVariable int id) throws Exception {
         Optional<ClassroomSubjectChatroom> classroomSubjectChatroom = classroomSubjectChatroomRepository.findById(id);
         quiz.setClassroomSubjectChatroom(classroomSubjectChatroom.get());
+        quiz.setActive(false);
         Quiz returnedQuiz = quizRepository.save(quiz);
         for (Pupil pupil : classroomSubjectChatroom.get().getClassroom().getPupils()) {
             QuizPupil quizPupil = new QuizPupil(quiz, pupil);
@@ -73,13 +74,13 @@ public class QuizController {
     @RequestMapping(value = "/quiz/{id}/toggleactive", method = RequestMethod.PUT)
     public void toggleActive(@PathVariable int id) throws SQLException {
         Quiz quiz = quizRepository.findById(id).get();
-        System.out.println(quiz);
+        System.out.println(quiz.getActive());
         if (quiz.getActive() == true) {
             quiz.setActive(false);
         } else {
             quiz.setActive(true);
         }
-        System.out.println(quiz);
+        System.out.println(quiz.getActive());
         quizRepository.save(quiz);
     }
 
