@@ -113,7 +113,7 @@ public class QuizController {
         Optional<Quiz> quiz = quizRepository.findById(quizId);
         Catalog catalog = catalogRepository.findByClassroom(quiz.get().getClassroomSubjectChatroom().getClassroom());
         QuizPupil quizPupil = quizPupilRepository.findByPupilidAndQuizid(pupilId, quizId);
-        int quizGrade = Math.round((quizPupil.getScore() / quiz.get().getQuestions().size()) * 10);
+        int quizGrade = (int)(Math.round(((double)(quizPupil.getScore()) / quiz.get().getQuestions().size()) * 10));
         Grade grade = new Grade();
         grade.setGrade(quizGrade);
         grade.setPupil(pupilId);
