@@ -30,6 +30,7 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = {CascadeType.ALL})
     private Set<Question> questions;
 
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "classroomSubjectChatroom_id", referencedColumnName = "id")
     private ClassroomSubjectChatroom classroomSubjectChatroom;

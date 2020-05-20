@@ -80,4 +80,12 @@ public class ClassroomSubjectChatroom {
     public void setChatroom(Chatroom chatroom) {
         this.chatroom = chatroom;
     }
+
+    public Set<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
+    public void setQuizzes(Set<Quiz> quizzes) {
+        this.quizzes = quizzes;
+    }
 }
